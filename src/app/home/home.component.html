@@ -1,0 +1,41 @@
+<fieldset>
+    <legend>Què vols fer?</legend>
+
+    <form [formGroup]="initialForm" (ngSubmit) = "onClickSubmit(initialForm.value)">
+    <div>
+        <label for="inputNom">Nom: </label> 
+        <input type="text" formControlName="inputNom">
+    </div>
+
+    <div>
+        <label for="inputPre">Nom pressupost: </label> 
+        <input type="text" formControlName="inputPre">
+    </div>
+
+    <div>
+        <input type="checkbox" formControlName="checkbox1">
+        <label for="checkbox1">Una pàgina web: (500e una pàgina, +30e x pàgina i x idioma)</label>
+    </div>
+
+    <app-panell *ngIf='this.initialForm.get("checkbox1").value' (newItemEvent)="funcioFillPare($event)" [number1Init]="number1Init" [number2Init]="number2Init"></app-panell>
+
+    <div>
+        <input type="checkbox" formControlName="checkbox2">
+        <label for="checkbox2">Una consultoria SEO (300e)</label>
+    </div>
+
+    <div>
+        <input type="checkbox" formControlName="checkbox3">
+        <label for="checkbox3">Una campanya de Google Ads (200e)</label>
+    </div>
+
+    <input type="submit" class="forsubmit" value="Crea pressupost">
+    </form>
+</fieldset>
+
+<p>Preu: {{Press}}</p>
+
+<app-pressupost-list></app-pressupost-list>
+
+<button class="btn btn-primary" (click)="tornar()">Torna a la pantalla de benvinguda</button>
+<p style="font-size:'12px'">Atenció: es perdran els canvis.</p>

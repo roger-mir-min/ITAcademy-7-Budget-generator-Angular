@@ -1,0 +1,19 @@
+<div>Cercador</div>
+<input type="text" (input)="filterArray($event)">
+<div *ngFor="let pressupost of pressupostosDisplay">
+    <div>Nom del pressupost: {{pressupost["pressupost"]}}</div>
+    <div>Usuari: {{pressupost["usuari"]}}</div>
+    <div>Serveis:</div>
+    <div *ngIf="pressupost['serveis']['ads']">Anuncis</div>
+    <div *ngIf="pressupost['serveis']['seo']">SEO</div>
+    <div *ngIf="pressupost['serveis']['web']">
+        <div>Pàgina web</div>
+        <div>Pàgines: {{pressupost['serveis']['pags']}}</div>
+        <div>Idiomes: {{pressupost['serveis']['idioms']}}</div>
+    </div>
+    <div>Preu del pressupost: {{pressupost['preu']}}</div>
+</div>
+<div>Preu total: {{pressupostTotal}}</div>
+<button (click)="ordAlfab()">Ordena'ls alfabèticament</button>
+<button (click)="ordDate()">Ordena'ls per data</button>
+<button (click)="ordDate()">Recupera l'ordre original</button>
