@@ -2,7 +2,7 @@
     <div>
         <label for="number1">Nombre de pàgines: </label>
         <button (click)='suma("number1")'>+</button>
-        <input class="a" type="number" min="0" formControlName="number1" #input>
+        <input class="a" type="number" formControlName="number1" #input>
         <button (click)="resta('number1')">-</button>
         <app-modal></app-modal>
         <div *ngIf="numbersForm.get('number1').hasError('minValue')">
@@ -12,7 +12,7 @@
     <div>
         <label for="number2">Nombre d'idiomes: </label>
         <button (click)='suma("number2")'>+</button>
-        <input type="number" min="0" formControlName="number2">
+        <input type="number" formControlName="number2">
         <button (click)="resta('number2')">-</button>
         <app-modal2></app-modal2>
         <div *ngIf="numbersForm.get('number2').hasError('minValue')">

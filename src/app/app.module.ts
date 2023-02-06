@@ -42,7 +42,6 @@ const appRoutes: Routes = [
     RouterModule
   ],
   providers: [Injectable],
-  bootstrap: [AppComponent, HomeComponent, PanellComponent, ModalComponent, ModalComponent2
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

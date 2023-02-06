@@ -1,10 +1,6 @@
-import { Component, EventEmitter, Output, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
-import { FormsModule, FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { Servei1Service } from '../servei1.service';
-import { pairwise, startWith, delay } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
-declare var window: any;
 
 @Component({
   selector: 'app-panell',
@@ -13,73 +9,59 @@ declare var window: any;
 })
 export class PanellComponent implements OnInit {
 
-  @Output() formValue = new EventEmitter<any>()
-
-  constructor(private servei: Servei1Service, private modal: NgbModal, private fb: FormBuilder) {
-    let k = 0;
-   }
+  constructor(private fb: FormBuilder) {}
 
   //Es crea form
   numbersForm: FormGroup = this.fb.group({
-    number1: new FormControl(1, [this.minimumValueValidator]),
-    number2: new FormControl(1, [this.minimumValueValidator])
+    number1: [1, [this.minimumValueValidator]],
+    number2: [1, [this.minimumValueValidator]]
   });
-
+  //funció de validació del form
   minimumValueValidator(control: FormControl) {
     const value = control.value;
     return value >= 0 ? null : { minValue: true };
   }
 
-  //Funcions per augmentar o reduir el valor dels number inputs en clicar botons "+" 7 "-"
-  suma(fc: string) {
+  //Funcions per augmentar o reduir el valor dels number inputs en clicar botons "+" i "-"
+  suma(fc: string):void {
     this.numbersForm.get(fc).setValue(this.numbersForm.get(fc).value + 1);
   }
 
-  resta(fc: string) {
+  resta(fc: string):void {
     if (this.numbersForm.get(fc).value > 0) {
       this.numbersForm.get(fc).setValue(this.numbersForm.get(fc).value - 1);
     }
   }
 
-  setValue1(num: number) {
-    console.log(num);
+  //INPUT. S'estableix com a valors del form els valors rebuts des del component pare (a partir de l'url)
+  //Valors rebuts via @Input:
+  @Input() number1Init: number;
+  @Input() number2Init: number;
+
+  //Funcions que s'aplicaran als valors rebuts via @Input
+  setValue1(num: number):void {
     this.numbersForm.get("number1").setValue(num);
-    console.log(this.numbersForm.get("number1").value);
   }
 
-  setValue2(num: number) {
-    this.numbersForm.get("number2").setValue(num); 
+  setValue2(num: number):void {
+    this.numbersForm.get("number2").setValue(num);
   }
 
-  //@ViewChild('input') input;
-  @Input() number1Init;
-  @Input() number2Init;
-  //Quan canvia valor d'input, s'envia nou valor a servei perquè recalculi el pressupost
   ngOnInit() {
-    console.log("Comença OnInit");
-    console.log(this.number1Init);
-    console.log(this.number2Init);
+    //S'activen les funcions per introduir al form els valors rebuts via @Input
     this.setValue1(this.number1Init);
     this.setValue2(this.number2Init);
-    this.numbersForm.valueChanges.pipe(
-      startWith(this.numbersForm.value),
-      pairwise()
-    ).subscribe(([previousValue, currentValue]) => {
-      console.log("Comença subscribe");
-      // this.servei.addProd(-previousValue.number1, previousValue.number2);
-      // this.servei.addProd(currentValue.number1, currentValue.number2);
-      //finalment, s'envia els nous valors al Parent (HomeComponent)
+
+//OUTPUT. Quan canvien valors de form, s'envia el nou valor a HomeComponent
+    this.numbersForm.valueChanges.subscribe(() => {
       this.funcioPare();
     });
-    console.log("S'acaba OnInit");
   }
 
-  //Funció per enviar els nous valors al Parent
   @Output() newItemEvent = new EventEmitter<string>;
 
-  funcioPare() {
+  funcioPare():void {
     this.newItemEvent.emit(this.numbersForm.value);
-    console.log("pare");
   }
 
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Servei1Service } from '../servei1.service';
+import { Pressupost } from '../Interfaces';
 
 @Component({
   selector: 'app-pressupost-list',
@@ -9,46 +10,41 @@ import { Servei1Service } from '../servei1.service';
 export class PressupostListComponent {
   constructor(private servei: Servei1Service) { }
 
+  //Es declaren arrays de pressupostos
+  pressupostos: Pressupost[] = [...this.servei.pressupostosList()];
+  pressupostosDisplay: Pressupost[] = [];
+
+  //Es declara preu de tots els pressupostos de la llista
   pressupostTotal: number;
 
-  //S'obté preu total de tots els pressupostos
-  getTotal() {
-    this.pressupostTotal = this.servei.presTotal();
+  //S'obté la llista dels pressupostos i el preu total (tots dos s'imprimeixen per pantalla)
+  getTotal(): void {
     this.pressupostos = [...this.servei.pressupostosList()];
-    this.pressupostosCopy = [...this.servei.pressupostosList()];
     this.pressupostosDisplay = [...this.servei.pressupostosList()];
+
+    this.pressupostTotal = this.servei.presTotal();
   }
 
-  //S'obté array de pressupostos
-  pressupostos: Object[] = [...this.servei.pressupostosList()];
-  pressupostosDisplay: Object[] = [];
-  pressupostosCopy: Object[] = [];
-
   //S'ordenen pressupostos alfabèticament
-  ordAlfab() {
-    this.pressupostosDisplay = [...this.pressupostos.sort((a, b) => { if (a["pressupost"] > b["pressupost"]) { return 1; } else{ return -1; }})];
+  ordAlfab(): void {
+    this.pressupostosDisplay = [...this.pressupostos.sort((a, b) => { if (a["pressupost"] > b["pressupost"]) { return 1; } else { return -1; } })];
   }
 
   //S'ordenen pressupostos per data
-  ordDate() {
-    this.pressupostosDisplay = [...this.pressupostos.sort((a, b) => { if (a["data"] > b["data"]) { return 1; } else { return -1; } })]; 
+  ordDate(): void {
+    this.pressupostosDisplay = [...this.pressupostos.sort((a, b) => { if (a["data"] > b["data"]) { return 1; } else { return -1; } })];
   }
 
-  ordOrigin() {
-    this.pressupostosDisplay = [...this.pressupostosCopy];
+  ordOrigin(): void {
+    this.pressupostosDisplay = [...this.pressupostos];
   }
 
-  //Filtre del cercador
-  filterArray(event) {
-    console.log("filtre activat");
-    console.log(event.target.value);
+  //Funció del cercador
+  filterArray(event: Event): void {
     this.pressupostosDisplay = [...this.pressupostos.filter(obj => {
-      console.log(obj["pressupost"].includes(event.target.value));
-      if(obj["pressupost"].includes(event.target.value)){return true}else{return false};
+      if (typeof obj["pressupost"] == "string" && obj["pressupost"].includes((event.target as HTMLInputElement).value)) { return true } else { return false };
     })];
-    
+
   }
-
-
 
 }

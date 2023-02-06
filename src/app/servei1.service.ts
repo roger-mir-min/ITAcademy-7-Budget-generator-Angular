@@ -1,75 +1,60 @@
 import { Injectable } from '@angular/core';
+import { Pressupost } from 'src/app/Interfaces';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class Servei1Service {
 
-//Coses noves
-Pres: number = 0;
+  //PART VINCULADA A HOME COMPONENT
+  //Calculem el preu del pressupost
+  Pres: number = 0;
 
-  calcPres({ bool1, bool2, bool3, pags, idioms }) {
+  calcPres({ bool1, bool2, bool3, pags, idioms }): void {
     this.Pres = 0;
-  if (bool1) { this.Pres = 500 + 30 * pags * idioms; } else {
-    (this.Pres = 0)
+    if (bool1) { this.Pres = 500 + 30 * pags * idioms; } else {
+      (this.Pres = 0)
+    }
+    if (bool2) { this.Pres += 300 }
+    if (bool3) { this.Pres += 200 }
   }
-  if (bool2) { this.Pres += 300 }
-  if (bool3) { this.Pres += 200 }
-  console.log("S'ha calculat pressupost: " + this.Pres);
-}
-  
-getPres() {
+
+  //Retornem el preu del pressupost
+  getPres(): number {
     return this.Pres;
-}
-  
-// A parti d'aquí comença lo antic
+  }
 
-  constructor() { }
+  //PART VINCULADA A PRESSUPOSTOSLIST COMPONENT
 
-  // totalSum = 0;
-
-  pressupostos: Object[] = [];
+  pressupostos: Pressupost[] = [];
 
   pressupostTotal: number;
 
-  addPres(pressupost: Object) {
+  //Funció que afegeix un pressupost a la llista de pressupostos (pressupostTotal)
+  addPres(pressupost: Pressupost) {
     this.pressupostos.push(pressupost);
-    console.log("S'ha afegit pressupost. Ara hi ha: ");
-    console.log(this.pressupostos);
     this.calcPresTotal();
   }
 
-  calcPresTotal() {
+  //Funció que calcula el cost de tots els pressupostos (pressupostTotal)
+  calcPresTotal(): void {
     this.pressupostTotal = 0;
     this.pressupostos.forEach(pres => {
-      this.pressupostTotal += pres["preu"];
+      if (typeof pres["preu"] == "number") {
+        this.pressupostTotal += pres["preu"];
+      }
     });
-    console.log("El preu totalíssim és: ");
-    console.log(this.pressupostTotal);
   }
 
-  presTotal() {
+  //Funció que retorna el cost de tots els pressupostos (pressupostTotal)
+  presTotal(): number {
     return this.pressupostTotal;
   }
 
-  pressupostosList() {
+  //Funció que retorna la llista de pressupostos (cridada per PressupostosList Component)
+  pressupostosList(): Pressupost[] {
     return this.pressupostos;
   }
-
-  // addValue(value: number) {
-  //   this.totalSum += value;
-  //   console.log("addValue: " + value);
-  //   //console.log("S'ha sumat " + value + "; sumTotal és " + this.totalSum);
-  // }
-
-  // getTotalSum() {
-  //   console.log("pare getTotaSum: " + this.totalSum);
-  //   return this.totalSum;
-  // }
-
-  // addProd(a: number, b: number) {
-  //   this.addValue(a * b * 30);
-  //   (console.log("addProd"))
-  // }
 
 }

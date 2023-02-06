@@ -1,35 +1,42 @@
 <fieldset>
     <legend>Què vols fer?</legend>
 
-    <form [formGroup]="initialForm" (ngSubmit) = "onClickSubmit(initialForm.value)">
-    <div>
-        <label for="inputNom">Nom: </label> 
-        <input type="text" formControlName="inputNom">
-    </div>
+    <form [formGroup]="initialForm" (ngSubmit)="onClickSubmit(initialForm.value)">
+        <div>
+            <label for="inputNom">Nom: </label>
+            <input type="text" formControlName="inputNom">
+            <div *ngIf="initialForm.get('inputNom').hasError('required') && initialForm.get('inputNom').touched">
+                Aquest camp és obligatori.
+            </div>
+        </div>
 
-    <div>
-        <label for="inputPre">Nom pressupost: </label> 
-        <input type="text" formControlName="inputPre">
-    </div>
+        <div>
+            <label for="inputPre">Nom pressupost: </label>
+            <input type="text" formControlName="inputPre">
+            <div *ngIf="initialForm.get('inputPre').hasError('required') && initialForm.get('inputPre').touched">
+                Aquest camp és obligatori.
+            </div>
+        </div>
 
-    <div>
-        <input type="checkbox" formControlName="checkbox1">
-        <label for="checkbox1">Una pàgina web: (500e una pàgina, +30e x pàgina i x idioma)</label>
-    </div>
+        <div>
+            <input type="checkbox" formControlName="checkbox1">
+            <label for="checkbox1">Una pàgina web</label>
+        </div>
 
-    <app-panell *ngIf='this.initialForm.get("checkbox1").value' (newItemEvent)="funcioFillPare($event)" [number1Init]="number1Init" [number2Init]="number2Init"></app-panell>
+        <app-panell *ngIf='this.initialForm.get("checkbox1").value' (newItemEvent)="funcioFillPare($event)"
+            [number1Init]="number1Init" [number2Init]="number2Init"></app-panell>
 
-    <div>
-        <input type="checkbox" formControlName="checkbox2">
-        <label for="checkbox2">Una consultoria SEO (300e)</label>
-    </div>
+        <div>
+            <input type="checkbox" formControlName="checkbox2">
+            <label for="checkbox2">Una consultoria SEO</label>
+        </div>
 
-    <div>
-        <input type="checkbox" formControlName="checkbox3">
-        <label for="checkbox3">Una campanya de Google Ads (200e)</label>
-    </div>
+        <div>
+            <input type="checkbox" formControlName="checkbox3">
+            <label for="checkbox3">Una campanya de Google Ads</label>
+        </div>
 
-    <input type="submit" class="forsubmit" value="Crea pressupost">
+        <input type="submit" [disabled]="!initialForm.valid" class="forsubmit" value="Crea pressupost">
     </form>
 </fieldset>
 
@@ -38,4 +45,3 @@
 <app-pressupost-list></app-pressupost-list>
 
 <button class="btn btn-primary" (click)="tornar()">Torna a la pantalla de benvinguda</button>
-<p style="font-size:'12px'">Atenció: es perdran els canvis.</p>
