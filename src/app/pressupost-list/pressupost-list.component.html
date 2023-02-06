@@ -1,6 +1,6 @@
 <div>Cercador</div>
 <input type="text" (input)="filterArray($event)">
-<div *ngFor="let pressupost of pressupostosDisplay">
+<div *ngFor="let pressupost of pressupostosDisplay; let i = index">
     <div>Nom del pressupost: {{pressupost["pressupost"]}}</div>
     <div>Usuari: {{pressupost["usuari"]}}</div>
     <div>Serveis:</div>
@@ -12,8 +12,10 @@
         <div>Idiomes: {{pressupost['serveis']['idioms']}}</div>
     </div>
     <div>Preu del pressupost: {{pressupost['preu']}}</div>
+    <button (click)="delPres(i)">Elimina aquest element</button>
 </div>
 <div>Preu total: {{pressupostTotal}}</div>
 <button (click)="ordAlfab()">Ordena'ls alfabèticament</button>
 <button (click)="ordDate()">Ordena'ls per data</button>
-<button (click)="ordDate()">Recupera l'ordre original</button>
+<button (click)="ordOrigin()">Recupera l'ordre original</button>
+<button (click)="delList()">Esborra la llista</button>

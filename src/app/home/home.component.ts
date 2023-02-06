@@ -66,9 +66,8 @@ export class HomeComponent {
         }
       });
 
-      //A partir dels valors obtinguts de l'url, calculem el pressupost
-      let valuesT = { bool1: this.initialForm.get("checkbox1").value, bool2: this.initialForm.get("checkbox2").value, bool3: this.initialForm.get("checkbox3").value, pags: this.initialForm.get("numbersForm.number1").value, idioms: this.initialForm.get("numbersForm.number2").value };
-      this.servei.calcPres(valuesT);
+      //Enviem els nous valors del form al servei perquè calculi el pressupost, i el recuperem per poder-lo imprimir en pantalla
+      this.servei.setPres(this.initialForm);
       this.Press = this.servei.getPres();
 
       //Guardem els nous valors dels number inputs a les propietats que tenen property binding amb Panell Component
