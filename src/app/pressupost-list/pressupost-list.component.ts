@@ -25,9 +25,9 @@ export class PressupostListComponent {
 
   //S'obté la llista dels pressupostos i el preu total (tots dos s'imprimeixen per pantalla)
   getTotal(): void {
-    this.pressupostos = [...JSON.parse(localStorage.getItem("array"))];
-    this.pressupostosDisplay = [...JSON.parse(localStorage.getItem("array"))];
-    this.pressupostosO = [...JSON.parse(localStorage.getItem("array"))];
+    this.pressupostos = this.servei.retList();
+    this.pressupostosDisplay = this.servei.retList();
+    this.pressupostosO = this.servei.retList();
 
     this.pressupostTotal = this.servei.presTotal();
   }
