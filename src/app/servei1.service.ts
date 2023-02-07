@@ -41,7 +41,7 @@ export class Servei1Service {
 
   //Funció que afegeix un pressupost a la llista de pressupostos (pressupostos)
   addPres(pressupost: Pressupost) {
-    let array = JSON.parse(localStorage.getItem("array"));
+    const array = JSON.parse(localStorage.getItem("array"));
 
     if (array) {
       array.push(pressupost);
