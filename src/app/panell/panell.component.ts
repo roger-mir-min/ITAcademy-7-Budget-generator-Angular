@@ -9,7 +9,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class PanellComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   //Es crea form
   numbersForm: FormGroup = this.fb.group({
@@ -19,15 +19,15 @@ export class PanellComponent implements OnInit {
   //funció de validació del form
   minimumValueValidator(control: FormControl) {
     const value = control.value;
-    return value >= 0 ? null : { minValue: true };
+    return value >= 1 ? null : { minValue: true };
   }
 
   //Funcions per augmentar o reduir el valor dels number inputs en clicar botons "+" i "-"
-  suma(fc: string):void {
+  suma(fc: string): void {
     this.numbersForm.get(fc).setValue(this.numbersForm.get(fc).value + 1);
   }
 
-  resta(fc: string):void {
+  resta(fc: string): void {
     if (this.numbersForm.get(fc).value > 0) {
       this.numbersForm.get(fc).setValue(this.numbersForm.get(fc).value - 1);
     }
@@ -39,11 +39,11 @@ export class PanellComponent implements OnInit {
   @Input() number2Init: number;
 
   //Funcions que s'aplicaran als valors rebuts via @Input
-  setValue1(num: number):void {
+  setValue1(num: number): void {
     this.numbersForm.get("number1").setValue(num);
   }
 
-  setValue2(num: number):void {
+  setValue2(num: number): void {
     this.numbersForm.get("number2").setValue(num);
   }
 
@@ -52,7 +52,7 @@ export class PanellComponent implements OnInit {
     this.setValue1(this.number1Init);
     this.setValue2(this.number2Init);
 
-//OUTPUT. Quan canvien valors de form, s'envia el nou valor a HomeComponent
+    //OUTPUT. Quan canvien valors de form, s'envia el nou valor a HomeComponent
     this.numbersForm.valueChanges.subscribe(() => {
       this.funcioPare();
     });
@@ -60,7 +60,7 @@ export class PanellComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<string>;
 
-  funcioPare():void {
+  funcioPare(): void {
     this.newItemEvent.emit(this.numbersForm.value);
   }
 

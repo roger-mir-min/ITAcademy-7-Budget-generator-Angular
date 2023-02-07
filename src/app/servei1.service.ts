@@ -72,6 +72,10 @@ export class Servei1Service {
   }
 
   //Funció que retorna la llista de pressupostos (cridada per PressupostosList Component)
-  
+  retList() {
+    if (localStorage.getItem("array")) {
+      return [...JSON.parse(localStorage.getItem("array"))];
+    }else{return []}
+  }
 
 }

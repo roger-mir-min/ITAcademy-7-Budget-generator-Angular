@@ -1,27 +1,31 @@
-<h5>Llistat de pressupostos</h5>
-<div class="mb-2">Cercador</div>
-<input type="text" (input)="filterArray($event)" class="mb-3">
+<h5 class="mt-2"><u>Llistat de pressupostos</u></h5>
+<div class="mb-2">Cercador de pressupostos</div>
+<input type="text" (input)="filterArray($event)">
 <br>
-<button (click)="ordAlfab()" class="me-1">Ordena'ls alfabèticament</button>
-<button (click)="ordDate()" class="me-1">Ordena'ls per data</button>
-<button (click)="ordOrigin()" class="me-1">Recupera l'ordre original</button>
-<button (click)="delList()">Esborra la llista</button>
+<div class="d-flex flex-wrap">
+<button (click)="ordAlfab()" class="me-1 mt-3 btn btn-primary">Ordena'ls alfabèticament</button>
+<button (click)="ordDate()" class="me-1 mt-3 btn btn-success">Ordena'ls per data</button>
+<button (click)="ordOrigin()" class="me-1 mt-3 btn btn-warning">Recupera l'ordre original</button>
+</div>
+<div class="my-2"><b>Preu total:</b> {{pressupostTotal}}€</div>
 
-<div class="my-2">Preu total: {{pressupostTotal}}</div>
-
-<div class="d-flex flex-wrap mt-4" style="gap:20px 20px">
-<div *ngFor="let pressupost of pressupostosDisplay; let i = index" class="me-3">
-    <div><b>Nom del pressupost: {{pressupost["pressupost"]}}</b></div>
-    <div>Usuari: {{pressupost["usuari"]}}</div>
-    <div>Serveis:</div>
-    <div *ngIf="pressupost['serveis']['ads']">Anuncis</div>
-    <div *ngIf="pressupost['serveis']['seo']">SEO</div>
-    <div *ngIf="pressupost['serveis']['web']">
-        <div>Pàgina web</div>
-        <div>Pàgines: {{pressupost['serveis']['pags']}}</div>
-        <div>Idiomes: {{pressupost['serveis']['idioms']}}</div>
+<div class="d-flex flex-wrap mt-4" style="gap:20px 0px">
+    <div *ngFor="let pressupost of pressupostosDisplay; let i = index" class="me-3 border p-3">
+        <div><b>NOM DEL PRESSUPOST: {{pressupost["pressupost"]}}</b></div>
+        <div><b>Usuari</b>: {{pressupost["usuari"]}}</div>
+        <div><b>Serveis:</b></div>
+        <div *ngIf="pressupost['serveis']['ads']" class="ps-2">-Anuncis</div>
+        <div *ngIf="pressupost['serveis']['seo']" class="ps-2">-SEO</div>
+        <div *ngIf="pressupost['serveis']['web']" class="ps-2">
+            <ul class="ps-0 list-unstyled">-Pàgina web:
+            <li class="ps-4">Pàgines: {{pressupost['serveis']['pags']}}</li>
+            <li class="ps-4">Idiomes: {{pressupost['serveis']['idioms']}}</li>
+            </ul>
+        </div>
+        <div class="mt-auto"><b><i class="fa-solid fa-arrow-right"></i> Preu:</b> {{pressupost['preu']}}€</div>
+        <div class="text-center">
+        <button (click)="delPres(i)" class="btn btn-outline-danger py-0 mt-3">Elimina aquest element</button>
+        </div>
     </div>
-    <div>Preu del pressupost: {{pressupost['preu']}}€</div>
-    <button (click)="delPres(i)">Elimina aquest element</button>
 </div>
-</div>
+<button *ngIf="pressupostosDisplay.length!=0" (click)="delList()" class="btn btn-danger mt-3">Esborra la llista</button>

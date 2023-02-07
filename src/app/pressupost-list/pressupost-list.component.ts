@@ -11,9 +11,9 @@ export class PressupostListComponent {
   constructor(private servei: Servei1Service) { }
 
   //Es declaren arrays de pressupostos
-  pressupostos: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
-  pressupostosDisplay: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
-  pressupostosO: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
+  pressupostos: Pressupost[] = this.servei.retList();
+  pressupostosDisplay: Pressupost[] = this.servei.retList();
+  pressupostosO: Pressupost[] = this.servei.retList();
 
   //Es declara preu de tots els pressupostos de la llista
   pressupostTotal: number = this.servei.presTotal();
@@ -48,7 +48,7 @@ export class PressupostListComponent {
   }
 
   //S'esborra la llista de pressupostos
-  delList():void {
+  delList(): void {
     localStorage.removeItem("array");
     this.pressupostos = [];
     this.pressupostosDisplay = [];

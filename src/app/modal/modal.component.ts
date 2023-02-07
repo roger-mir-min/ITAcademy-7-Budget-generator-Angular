@@ -20,7 +20,7 @@ export class ModalComponent {
 
 
   openWindow(contenido) {
-    this.modal.open(contenido, { windowClass: 'oscuro' });
+    this.modal.open(contenido);
   }
 
 }
