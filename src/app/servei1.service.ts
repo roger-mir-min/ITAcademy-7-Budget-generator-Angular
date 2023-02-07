@@ -13,14 +13,14 @@ export class Servei1Service {
 
   //Transformem valors de form en objecte més manejable, el guardem a localstore i recalculem el pressupost
   setPres(initialForm) {
-    let obj = { bool1: initialForm.get("checkbox1").value, bool2: initialForm.get("checkbox2").value, bool3: initialForm.get("checkbox3").value, pags: initialForm.get("numbersForm.number1").value, idioms: initialForm.get("numbersForm.number2").value };
+    const obj = { bool1: initialForm.get("checkbox1").value, bool2: initialForm.get("checkbox2").value, bool3: initialForm.get("checkbox3").value, pags: initialForm.get("numbersForm.number1").value, idioms: initialForm.get("numbersForm.number2").value };
     localStorage.setItem("pressupost", JSON.stringify(obj));
     this.calcPres();
   }
 
   calcPres(): void {
     this.Pres = 0;
-    let PresActual = JSON.parse(localStorage.getItem("pressupost"));
+    const PresActual = JSON.parse(localStorage.getItem("pressupost"));
     if (PresActual["bool1"]) { this.Pres = 500 + 30 * PresActual["pags"] * PresActual["idioms"]; } else {
       (this.Pres = 0)
     }

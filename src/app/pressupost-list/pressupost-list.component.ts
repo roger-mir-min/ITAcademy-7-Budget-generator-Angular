@@ -59,7 +59,7 @@ export class PressupostListComponent {
 
   //S'esborra un pressupost de la llista
   delPres(i: number) {
-    let arr = JSON.parse(localStorage.getItem("array"));
+    const arr = JSON.parse(localStorage.getItem("array"));
     arr.splice(i, 1);
     localStorage.setItem("array", JSON.stringify(arr));
     this.getTotal();
@@ -70,7 +70,7 @@ export class PressupostListComponent {
   //Funció del cercador
   filterArray(event: Event): void {
     this.pressupostosDisplay = [...this.pressupostos.filter(obj => {
-      if (typeof obj["pressupost"] == "string" && obj["pressupost"].includes((event.target as HTMLInputElement).value)) { return true } else { return false };
+      if (typeof obj["pressupost"] == "string" && obj["pressupost"].includes((event.target as HTMLInputElement).value)) { return true } else { return false }
     })];
 
   }

@@ -1,3 +1,3 @@
 export interface Pressupost {
-    [key: string]: string | boolean | Object;
+    [key: string]: string | boolean | number | object;
 }

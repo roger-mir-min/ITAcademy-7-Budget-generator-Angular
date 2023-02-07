@@ -106,9 +106,9 @@ export class HomeComponent {
 
   //En fer submit, s'emmagatzemen els valors del form en objecte i s'envien al servei
   onClickSubmit(formValue: Pressupost): void {
-    let obj = Object.keys(formValue);
-    let date = new Date(Date.now()).toLocaleString(); //.split(',')[0];
-    let pressupost: Pressupost = { usuari: formValue[obj[0]], pressupost: formValue[obj[1]], preu: this.Press, data: date, serveis: { web: formValue[obj[2]], pags: formValue[obj[5]]["number1"], idioms: formValue[obj[5]]["number2"], seo: formValue[obj[3]], ads: formValue[obj[4]] } };
+    const obj = Object.keys(formValue);
+    const date = new Date(Date.now()).toLocaleString(); //.split(',')[0];
+    const pressupost: Pressupost = { usuari: formValue[obj[0]], pressupost: formValue[obj[1]], preu: this.Press, data: date, serveis: { web: formValue[obj[2]], pags: formValue[obj[5]]["number1"], idioms: formValue[obj[5]]["number2"], seo: formValue[obj[3]], ads: formValue[obj[4]] } };
     this.servei.addPres(pressupost);
     //ordenem a PressupostListComponent que torni a obtenir el preu de tots els pressupostos, recalculat al servei
     this.pres.getTotal();
