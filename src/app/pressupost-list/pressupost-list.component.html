@@ -1,7 +1,17 @@
-<div>Cercador</div>
-<input type="text" (input)="filterArray($event)">
-<div *ngFor="let pressupost of pressupostosDisplay; let i = index">
-    <div>Nom del pressupost: {{pressupost["pressupost"]}}</div>
+<h5>Llistat de pressupostos</h5>
+<div class="mb-2">Cercador</div>
+<input type="text" (input)="filterArray($event)" class="mb-3">
+<br>
+<button (click)="ordAlfab()" class="me-1">Ordena'ls alfabèticament</button>
+<button (click)="ordDate()" class="me-1">Ordena'ls per data</button>
+<button (click)="ordOrigin()" class="me-1">Recupera l'ordre original</button>
+<button (click)="delList()">Esborra la llista</button>
+
+<div class="my-2">Preu total: {{pressupostTotal}}</div>
+
+<div class="d-flex flex-wrap mt-4" style="gap:20px 20px">
+<div *ngFor="let pressupost of pressupostosDisplay; let i = index" class="me-3">
+    <div><b>Nom del pressupost: {{pressupost["pressupost"]}}</b></div>
     <div>Usuari: {{pressupost["usuari"]}}</div>
     <div>Serveis:</div>
     <div *ngIf="pressupost['serveis']['ads']">Anuncis</div>
@@ -11,11 +21,7 @@
         <div>Pàgines: {{pressupost['serveis']['pags']}}</div>
         <div>Idiomes: {{pressupost['serveis']['idioms']}}</div>
     </div>
-    <div>Preu del pressupost: {{pressupost['preu']}}</div>
+    <div>Preu del pressupost: {{pressupost['preu']}}€</div>
     <button (click)="delPres(i)">Elimina aquest element</button>
 </div>
-<div>Preu total: {{pressupostTotal}}</div>
-<button (click)="ordAlfab()">Ordena'ls alfabèticament</button>
-<button (click)="ordDate()">Ordena'ls per data</button>
-<button (click)="ordOrigin()">Recupera l'ordre original</button>
-<button (click)="delList()">Esborra la llista</button>
+</div>

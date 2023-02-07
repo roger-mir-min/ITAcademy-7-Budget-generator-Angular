@@ -1,20 +1,20 @@
-<form [formGroup]="numbersForm">
-    <div>
-        <label for="number1">Nombre de pàgines: </label>
-        <button (click)='suma("number1")'>+</button>
-        <input class="a" type="number" formControlName="number1" #input>
-        <button (click)="resta('number1')">-</button>
-        <app-modal></app-modal>
+<form [formGroup]="numbersForm" class="border border-dark border-4 rounded px-3 w-75 py-4">
+    <div class="mb-3">
+        <label for="number1" class="me-2">Nombre de pàgines: </label>
+        <button (click)='suma("number1")' class="border-0 rounded bg-warning text-white">+</button>
+        <input class="a" type="number" formControlName="number1" width="20%">
+        <button (click)="resta('number1')" class="border-0 rounded bg-warning text-white">-</button>
+        <app-modal class="ms-2"></app-modal>
         <div *ngIf="numbersForm.get('number1').hasError('minValue')">
             El valor ha de ser més gran de 0.
         </div>
     </div>
     <div>
-        <label for="number2">Nombre d'idiomes: </label>
-        <button (click)='suma("number2")'>+</button>
+        <label for="number2" class="me-2">Nombre d'idiomes: </label>
+        <button (click)='suma("number2")' class="border-0 rounded bg-warning text-white">+</button>
         <input type="number" formControlName="number2">
-        <button (click)="resta('number2')">-</button>
-        <app-modal2></app-modal2>
+        <button (click)="resta('number2')" class="border-0 rounded bg-warning text-white">-</button>
+        <app-modal2 class="ms-2"></app-modal2>
         <div *ngIf="numbersForm.get('number2').hasError('minValue')">
             El valor ha de ser més gran de 0.
         </div>

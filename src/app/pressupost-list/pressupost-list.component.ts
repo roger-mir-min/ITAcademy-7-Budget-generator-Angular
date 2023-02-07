@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Servei1Service } from '../servei1.service';
 import { Pressupost } from '../Interfaces';
 
@@ -11,12 +11,17 @@ export class PressupostListComponent {
   constructor(private servei: Servei1Service) { }
 
   //Es declaren arrays de pressupostos
-  pressupostos: Pressupost[] = [];
-  pressupostosDisplay: Pressupost[] = [];
-  pressupostosO: Pressupost[] = [];
+  pressupostos: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
+  pressupostosDisplay: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
+  pressupostosO: Pressupost[] = [...JSON.parse(localStorage.getItem("array"))] || [];
 
   //Es declara preu de tots els pressupostos de la llista
-  pressupostTotal: number;
+  pressupostTotal: number = this.servei.presTotal();
+
+  ngOnInit() {
+    this.servei.calcPresTotal();
+    this.pressupostTotal = this.servei.presTotal();
+  }
 
   //S'obté la llista dels pressupostos i el preu total (tots dos s'imprimeixen per pantalla)
   getTotal(): void {
