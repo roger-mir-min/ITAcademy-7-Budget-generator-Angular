@@ -1,5 +1,5 @@
-<ng-template #contenido let-modal>
-    <div class="modal-body">
+<ng-template #modal1 let-modal>
+    <div class="modal-body"yy>
         En aquest requadre ha d'indicar el nombre de pàgines que desitja per al seu lloc web.
     </div>
     <div class="modal-footer">
@@ -7,5 +7,11 @@
     </div>
 </ng-template>
 
-<button type="button" (click)="openWindow(contenido)" class="p-0 m-0 border-0 align-bottom bg-white rounded"><i
-        class="fa-sharp fa-solid fa-circle-info text-muted"></i></button>
+<ng-template #modal2 let-modal>
+    <div class="modal-body">
+        En aquest requadre ha d'indicar el nombre d'idiomes amb els quals vol la seva pàgina web.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close()">Entesos</button>
+    </div>
+</ng-template>

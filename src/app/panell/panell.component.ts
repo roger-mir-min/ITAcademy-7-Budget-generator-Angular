@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { ModalComponent } from '../modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -9,7 +11,18 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class PanellComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  @ViewChild(ModalComponent) modal: ModalComponent;
+
+  openWindow1() {
+    this.modal.openWindow1();
+  }
+  
+  openWindow2() {
+    this.modal.openWindow2();
+  }
+
+
+  constructor(private fb: FormBuilder, private modalService: NgbModal) { }
 
   //Es crea form
   numbersForm: FormGroup = this.fb.group({

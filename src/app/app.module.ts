@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,10 +10,8 @@ import { BenvingudaComponent } from './benvinguda/benvinguda.component';
 import { PanellComponent } from './panell/panell.component';
 import { ModalComponent } from './modal/modal.component';
 import { PressupostListComponent } from './pressupost-list/pressupost-list.component';
-import { ModalComponent2 } from './modal2/modal.component';
 
 import { AppFilterPipe } from './app-filter.pipe';
-import { Injectable } from '@angular/core';
 
 const appRoutes: Routes = [
   { path: "", component: BenvingudaComponent },
@@ -28,8 +26,7 @@ const appRoutes: Routes = [
     PanellComponent,
     ModalComponent,
     PressupostListComponent,
-    AppFilterPipe,
-    ModalComponent2
+    AppFilterPipe
   ],
   imports: [
     BrowserModule,

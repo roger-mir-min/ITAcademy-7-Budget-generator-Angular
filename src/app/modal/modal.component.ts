@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -12,12 +12,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   
 
 export class ModalComponent {
+  
+  @ViewChild("modal1", { static: false }) modal1: TemplateRef<any>;
+  @ViewChild("modal2", { static: false }) modal2: TemplateRef<any>;
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
-
-  openWindow(contenido) {
-    this.modal.open(contenido);
+  openWindow1() {
+    this.modalService.open(this.modal1);
   }
-
+  
+  openWindow2() {
+    this.modalService.open(this.modal2);
+  }
 }
