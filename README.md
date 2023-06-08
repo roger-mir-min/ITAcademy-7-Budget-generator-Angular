@@ -1,4 +1,5 @@
 # Sprint7
+A simple budget generator. Introduce your name ("Nom"), the budget name ("Nom pressupost") and select some features. The budget ("Preu") will change according to your choices. Submit you budget and see it stored. When you have multiple budgets, you can order them alphabetically, by date or just restore the original order.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
 
