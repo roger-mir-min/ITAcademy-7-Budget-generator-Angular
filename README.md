@@ -13,6 +13,10 @@ Angular, SASS - ngBootstrap.
 ## Usage
 Click to "Clica per començar" to start. Introduce your name ("Nom"), the budget name ("Nom pressupost") and select some features. The budget ("Preu") will change according to your choices. Submit your budget and see it stored. When you have multiple budgets, you can order them alphabetically, by date or just restore the original order.
 
+## Installing
+Clone this repository https://github.com/roger-mir-min/ITAcademy-7-Budget-generator.git
+Install node_modules with "npm i" command
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
