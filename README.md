@@ -7,6 +7,9 @@ This project was deployed with Github Pages.
 ## Background
 Result of the Sprint 7 at IT Academy.
 
+## Stack
+Angular, SASS - ngBootstrap.
+
 ## Usage
 Click to "Clica per començar" to start. Introduce your name ("Nom"), the budget name ("Nom pressupost") and select some features. The budget ("Preu") will change according to your choices. Submit your budget and see it stored. When you have multiple budgets, you can order them alphabetically, by date or just restore the original order.
 
